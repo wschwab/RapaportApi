@@ -3,6 +3,7 @@ import { FaGem } from 'react-icons/fa'
 
 const AddButton = ({ setShowAddDiamond }) => (
     <div
+        className="btn-list_item__add"
         role="button"
         onClick={() => setShowAddDiamond(true)}
         onKeyDown={() => setShowAddDiamond(true)}

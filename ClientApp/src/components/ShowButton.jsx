@@ -4,6 +4,7 @@ import { FaList } from 'react-icons/fa'
 
 const ShowButton = ({ setShowDiamonds }) => (
     <div
+        className="btn-list_item__show"
         role="button"
         onClick={() => setShowDiamonds(true)}
         onKeyDown={() => setShowDiamonds(true)}

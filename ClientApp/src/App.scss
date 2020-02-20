@@ -1,0 +1,40 @@
+html {
+    height: 100%;
+}
+
+body {
+    background: #D3D3D3;
+    height: 100%;
+}
+
+container {
+    height: 100%;
+}
+
+$gradient: linear-gradient(to top right, #008080, #7fffd4);
+
+.btn-list {
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+
+    li {
+        background: white;
+        cursor: pointer;
+        height: 100px;
+        width: 100px;
+        max-width: 25%;
+        max-height: 25%;
+        font-size: 20px;
+        padding: 20px;
+        border-radius: 5px;
+        border-width: 40px;
+        border-color: $gradient;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
+}

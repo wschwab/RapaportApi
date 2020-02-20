@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import Buttons from './components/Buttons'
-import ShowButton from './components/ShowButton'
 import AddDiamond from './components/AddDiamond'
 import ShowDiamonds from './components/ShowDiamonds'
-
-import './custom.css'
 
 const App = () => {
     const [showAddDiamond, setShowAddDiamond] = useState(false)
     const [showDiamonds, setShowDiamonds] = useState(false)
 
     return (
-        <>
+        <div className="container">
             {
                 !showAddDiamond && !showDiamonds ?
                     <Buttons setShowAddDiamond={setShowAddDiamond} setShowDiamonds={setShowDiamonds} /> :
@@ -19,7 +16,7 @@ const App = () => {
                         <AddDiamond setShowAddDiamond={setShowAddDiamond} /> :
                         <ShowDiamonds setShowDiamonds={setShowDiamonds} />
             }
-        </>
+        </div>
     )
 }
 
