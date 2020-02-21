@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using RapaportApi.Models;
+
 namespace RapaportApi
 {
     public class Program
@@ -14,6 +16,16 @@ namespace RapaportApi
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+
+            Console.WriteLine();
+            var csvParserService = new CsvParserService();
+            EnvironmentVariablesExtensions path = "./Data/Diamonds.csv";
+            EnvironmentVariablesExtensions result = csvParserService.ReadCsvFileToDiamondModel(path);
+
+            var diamondToAdd = new DiamondModel();
+            result.Add(diamondToAdd);
+            Console.WriteLine();
+            csvParserService.WriteNewCsvFile("./Data/Diamonds.csv", result);
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,5 +34,6 @@ namespace RapaportApi
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }
