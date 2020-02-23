@@ -1,7 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+
+using RapaportApi.Models;
 
 namespace RapaportApi.Controllers
 {
@@ -9,17 +13,16 @@ namespace RapaportApi.Controllers
     {
         [Route("diamonds")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public ActionResult DiamondController()
+        public ActionResult ReadRecords()
         {
-            return Json(records);
+            return Content("Records read");
         }
 
         [Route("add")]
         [HttpPost]
-        public ActionResult AddDiamond(DiamondModel diamond)
+        public ActionResult AddDiamond(string shape, decimal size, string color, string clarity, decimal price, decimal listPrice)
         {
-            records.Add(diamond);
-            return Content("Diamond Successfully Added");
+            return Content("Diamond Successfully Added");            
         }
     }
 }

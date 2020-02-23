@@ -1,23 +1,39 @@
 ﻿import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { makeStyles } from '@material-ui/core/styles'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@material-ui/core'
 
 const ShowDiamonds = () => {
-    const [data, setData] = useState({ diamonds: [] })
+    const [data, setData] = useState([])
 
-    useEffect(() => {
-        axios.get('diamonds')
+    useEffect(data => {
+        axios.get('/diamonds')
             .then(res => {
-                setData({
-                    diamonds: res.data
-                })
+                setData([
+                    JSON.parse(res.data)
+                ])
+                console.log(data)
             })
-            .catch(err => {
-                console.err(err)
-            })
+            .catch(err => console.error(err))
+    },[])
+
+    const useStyles = makeStyles({
+        table: {
+            minWidth: 650
+        }
     })
+
+    const classes = useStyles()
+
+    const createData = (shape, size, color, clarity, price, listPrice) => (
+        { shape, size, color, clarity, price, listPrice }    
+    )
+
+    const rows = data.map(diamond => createData(JSON.parse(diamond)))
 
     const avgPrice = data => {
         let summed = 0;
-        data.diamonds.forEach(diamond => summed += diamond.price);
+        data.forEach(diamond => summed += diamond.price);
         const average = summed / data.length;
 
         return average.toFixed(2)
@@ -25,43 +41,46 @@ const ShowDiamonds = () => {
 
     const avgDiscount = data => {
         let summed = 0;
-        data.diamonds.forEach(diamond => summed += diamond.listPrice - diamond.price);
+        data.forEach(diamond => summed += diamond.listPrice - diamond.price);
         const average = summed / data.length;
 
         return average.toFixed(2)
     }
 
+    
     return (
         <div>
-            <table className="diamond-table">
-                <tr>
-                    <th>Shape</th>
-                    <th>Size</th>
-                    <th>Color</th>
-                    <th>Clarity</th>
-                    <th>Price</th>
-                    <th>List Price</th>
-                </tr>
-                {data
-                    ? data.diamonds.map(diamond => (
-                        <tr className="diamond-table__row">
-                            <td>{diamond.shape}</td>
-                            <td>{diamond.size}</td>
-                            <td>{diamond.color}</td>
-                            <td>{diamond.clarity}</td>
-                            <td>{diamond.price}</td>
-                            <td>{diamond.listPrice}</td>
-                        </tr>
-                    :
-                        <tr className="no-diamond__row">
-                            <td rowspan="6">No diamonds to display</td>
-                        </tr>
-                    ))
-                }
-            </table>
+            <Typography variant="h2">Diamond List</Typography>
+            <TableContainer component={Paper}>
+                <Table className={classes.table}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="right">Shape</TableCell>
+                            <TableCell align="right">Size</TableCell>
+                            <TableCell align="right">Color</TableCell>
+                            <TableCell align="right">Clarity</TableCell>
+                            <TableCell align="right">Price</TableCell>
+                            <TableCell align="right">List Price</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map(row => (
+                            <TableRow key={rows.indexOf(row)}>
+                                <TableCell align="right">{row.shape}</TableCell>
+                                <TableCell align="right">{row.size}</TableCell>
+                                <TableCell align="right">{row.color}</TableCell>
+                                <TableCell align="right">{row.clarity}</TableCell>
+                                <TableCell align="right">{row.price}</TableCell>
+                                <TableCell align="right">{row.listPrice}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
             <ul className="diamond-stats">
                 <li>Average price = {avgPrice(data)}</li>
-                <li>Number of diamonds = {data.diamonds.length}</li>
+                <li>Number of diamonds = {data.length}</li>
                 <li>Average discount = {avgDiscount(data)}</li>
             </ul>
         </div>

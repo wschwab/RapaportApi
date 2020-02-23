@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 using RapaportApi.Models;
+using RapaportApi.Controllers;
 
 namespace RapaportApi
 {
@@ -18,29 +20,15 @@ namespace RapaportApi
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-
-            TextReader reader = new StreamReader("./Data/DiamondData.csv");
-            var csvReader = new CsvReader(reader);
-            var records = csvReader.GetRecords<DiamondModel>();
-
-            Console.WriteLine();
-            var csvParserService = new CsvParserService();
-            EnvironmentVariablesExtensions path = "./Data/DiamondData.csv";
-            EnvironmentVariablesExtensions result = csvParserService.ReadCsvFileToDiamondModel(path);
-
-            var diamondToAdd = new DiamondModel();
-            result.Add(diamondToAdd);
-            Console.WriteLine();
-            csvParserService.WriteNewCsvFile("./Data/DiamondData.csv", result);
         }
 
-        public static void addDiamond(string shape, decimal size, string color, string clarity, decimal price, decimal listPrice)
+        public static void AddDiamond(string shape, decimal size, string color, string clarity, decimal price, decimal listPrice)
         {
             try
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter("./data/DiamondData.csv", true))
+                StreamWriter sw = new StreamWriter("./data/DiamondData.csv", true);
                 {
-                    file.WriteLine(shape + "," + size + "," + color + "," + clarity + "," + price + "," + listPrice);
+                    sw.WriteLine(shape + "," + size + "," + color + "," + clarity + "," + price + "," + listPrice);
                 }
             }
             catch(Exception ex)
@@ -49,16 +37,20 @@ namespace RapaportApi
             }
         }
 
-        public static string[] readRecords()
+        public static string[] ReadRecords()
         {
             try
             {
                 var records = new List<string[]>();
-                string[] lines = System.IO.File.ReadAllLines("./data/DiamondData.csv");
+                string[] lines = File.ReadAllLines("./data/DiamondData.csv");
                 lines.Skip(1);
-                foreach (string line in lines)
-                    records.Add(line.Split(','))
-                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(records);
+                JsonSerializer sz = new JsonSerializer();
+                using (StreamWriter sw = new StreamWriter("./data/DiamondData.csv"))
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    sz.Serialize(writer, lines);
+                }
+                return lines;
             }
             catch(Exception ex)
             {
