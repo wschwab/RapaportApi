@@ -13,8 +13,8 @@ const App = () => {
                 !showAddDiamond && !showDiamonds ?
                     <Buttons setShowAddDiamond={setShowAddDiamond} setShowDiamonds={setShowDiamonds} /> :
                     showAddDiamond ?
-                        <AddDiamond setShowAddDiamond={setShowAddDiamond} /> :
-                        <ShowDiamonds setShowDiamonds={setShowDiamonds} />
+                        <AddDiamond setShowAddDiamond={setShowAddDiamond} url="/add" /> :
+                        <ShowDiamonds setShowDiamonds={setShowDiamonds} url="/diamonds" />
             }
         </div>
     )
