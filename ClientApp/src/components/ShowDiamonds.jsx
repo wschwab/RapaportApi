@@ -9,6 +9,7 @@ const ShowDiamonds = () => {
     useEffect(data => {
         axios.get('/api/DiamondModels')
             .then(res => {
+                console.log(res)
                 setData([
                     JSON.parse(res.data)
                 ])

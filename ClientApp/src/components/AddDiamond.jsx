@@ -12,24 +12,18 @@ const AddDiamond = () => {
             .then(res => {
                 console.log(res.data)
             })
-            .catch(err => {
-                console.error(err)
-                setInputs({
-                    ...inputs,
-                    errors: err.response.data
-                })
-            })
+            .catch(err => console.error(err))
         setSubmitted(false)
     }, [submitted])
 
     const handleInputChange = event => {
-        setInputs(inputs => ({...inputs, [event.target.name]: event.taget.value}))
+        setInputs({...inputs, [event.target.name]: event.target.value})
     }
 
     return (
         <Grid container className="form-container">
             <Typography variant="h3">Add a Diamond</Typography>
-            <form onSubmit={useEffect}>
+            <form noValidate onSubmit={useEffect}>
                 <TextField name="shape" label="Shape" onChange={handleInputChange} value={inputs.shape} required />
                 <TextField name="size" label="Size" onChange={handleInputChange} value={inputs.size} required />
                 <TextField name="color" label="Color" onChange={handleInputChange} value={inputs.color} required />
