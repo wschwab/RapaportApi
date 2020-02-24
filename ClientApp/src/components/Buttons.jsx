@@ -4,12 +4,12 @@ import ShowButton from './ShowButton'
 
 const Buttons = ({ setShowAddDiamond, setShowDiamonds }) => (
     <ul className="btn-list">
-        <li className="btn-list_item">
+        <div className="btn-list_item__border"><li className="btn-list_item">
             <AddButton setShowAddDiamond={setShowAddDiamond} />
-        </li>
-        <li className="btn-list_item">
+        </li></div>
+        <div className="btn-list_item__border"><li className="btn-list_item">
             <ShowButton setShowDiamonds={setShowDiamonds} />
-        </li>
+        </li></div>
     </ul>
 )
 

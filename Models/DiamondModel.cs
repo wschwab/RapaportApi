@@ -1,12 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RapaportApi.Models
 {
     public class DiamondModel
     {
+        [Key]
+        public Guid Id { get; set; }
         [Required]
         public string Shape { get; set; }
-        [Key]
+        [Required]
         public decimal Size { get; set; }
         [Required]
         public string Color { get; set; }

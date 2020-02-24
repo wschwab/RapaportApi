@@ -8,7 +8,7 @@ const AddDiamond = () => {
 
     useEffect(inputs => {
         const newDiamond = { ...inputs }
-        axios.post('/add', newDiamond)
+        axios.post('/api/DiamondModels', newDiamond)
             .then(res => {
                 console.log(res.data)
             })
@@ -28,7 +28,7 @@ const AddDiamond = () => {
 
     return (
         <Grid container className="form-container">
-            <Typography variant="h2">Add a Diamond</Typography>
+            <Typography variant="h3">Add a Diamond</Typography>
             <form onSubmit={useEffect}>
                 <TextField name="shape" label="Shape" onChange={handleInputChange} value={inputs.shape} required />
                 <TextField name="size" label="Size" onChange={handleInputChange} value={inputs.size} required />

@@ -7,7 +7,7 @@ const ShowDiamonds = () => {
     const [data, setData] = useState([])
 
     useEffect(data => {
-        axios.get('/diamonds')
+        axios.get('/api/DiamondModels')
             .then(res => {
                 setData([
                     JSON.parse(res.data)
@@ -50,7 +50,7 @@ const ShowDiamonds = () => {
     
     return (
         <div>
-            <Typography variant="h2">Diamond List</Typography>
+            <Typography variant="h3">Diamond List</Typography>
             <TableContainer component={Paper}>
                 <Table className={classes.table}>
                     <TableHead>
