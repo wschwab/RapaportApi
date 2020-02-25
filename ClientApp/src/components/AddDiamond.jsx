@@ -7,9 +7,10 @@ const AddDiamond = ({ setShowAddDiamond }) => {
     const [inputs, setInputs] = useState({})
     const [submitted, setSubmitted] = useState(false)
 
+
     useEffect(inputs => {
-        const newDiamond = { ...inputs }
-        axios.post('/api/DiamondModels', newDiamond)
+        console.log(inputs)
+        axios.post('/api/DiamondModels', inputs)
             .then(res => {
                 console.log(res.data)
             })
@@ -25,7 +26,7 @@ const AddDiamond = ({ setShowAddDiamond }) => {
         <>
             <Grid container className="form-container">
                 <Typography variant="h3">Add a Diamond</Typography>
-                <form noValidate onSubmit={useEffect}>
+                <form noValidate>
                     <TextField name="shape" label="Shape" onChange={handleInputChange} value={inputs.shape} required />
                     <TextField name="size" label="Size" onChange={handleInputChange} value={inputs.size} required />
                     <TextField name="color" label="Color" onChange={handleInputChange} value={inputs.color} required />
@@ -39,7 +40,7 @@ const AddDiamond = ({ setShowAddDiamond }) => {
                 </form>
             </Grid>
 
-            <Button type="submit" onClick={() => setShowAddDiamond(false)}>
+            <Button type="home" onClick={() => setShowAddDiamond(false)}>
                 <FaHome />
             </Button>
         </>

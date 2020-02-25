@@ -10,11 +10,8 @@ const ShowDiamonds = ({ setShowDiamonds }) => {
     useEffect(data => {
         axios.get('/api/DiamondModels')
             .then(res => {
-                console.log(res)
-                setData([
-                    JSON.parse(res.data)
-                ])
-                console.log(data)
+                console.log(res.data)
+                setData(res.data)
             })
             .catch(err => console.error(err))
     },[])
@@ -26,12 +23,6 @@ const ShowDiamonds = ({ setShowDiamonds }) => {
     })
 
     const classes = useStyles()
-
-    const createData = (shape, size, color, clarity, price, listPrice) => (
-        { shape, size, color, clarity, price, listPrice }    
-    )
-
-    const rows = data.map(diamond => createData(JSON.parse(diamond)))
 
     const avgPrice = data => {
         let summed = 0;
@@ -66,8 +57,8 @@ const ShowDiamonds = ({ setShowDiamonds }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(row => (
-                            <TableRow key={rows.indexOf(row)}>
+                        {data.map(row => (
+                            <TableRow key={data.indexOf(row)}>
                                 <TableCell align="right">{row.shape}</TableCell>
                                 <TableCell align="right">{row.size}</TableCell>
                                 <TableCell align="right">{row.color}</TableCell>
@@ -86,7 +77,7 @@ const ShowDiamonds = ({ setShowDiamonds }) => {
                 <li>Average discount = {avgDiscount(data)}</li>
             </ul>
 
-            <Button type="submit" onClick={() => setShowDiamonds(false)}>
+            <Button type="home" onClick={() => setShowDiamonds(false)}>
                 <FaHome />
             </Button>
 

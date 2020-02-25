@@ -1,0 +1,12 @@
+{
+  "_comment": "This is a dummy package.json as a hacky fix for a Heroku problem. The real package.json is in ./ClientApp",
+
+  "exclude": [
+    "**/bin",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules",
+    "**/obj",
+    "**/platforms"
+  ]
+}
