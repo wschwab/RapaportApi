@@ -1,10 +1,7 @@
 ﻿import React from 'react'
-import { useAddDScreen } from '../context'
 import { FaGem } from 'react-icons/fa'
 
-const AddButton = () => {
-    const { setShowAddDiamond } = useAddDScreen()
-
+const AddButton = ({ setShowAddDiamond }) => {
     return (
         <div
             className="btn-list_item__add"

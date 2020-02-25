@@ -1,10 +1,7 @@
 ﻿import React from 'react'
 import { FaList } from 'react-icons/fa'
-import { useShowDScreen } from '../context'
 
-
-const ShowButton = () => {
-    const { setShowDiamonds } = useShowDScreen()
+const ShowButton = ({ setShowDiamonds }) => {
 
     return (
         <div

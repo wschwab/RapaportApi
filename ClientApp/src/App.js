@@ -1,23 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Buttons from './components/Buttons'
 import AddDiamond from './components/AddDiamond'
 import ShowDiamonds from './components/ShowDiamonds'
-import { useAddDScreen, useShowDScreen, AddDScreenProvider, ShowDScreenProvider } from './context'
 
 const App = () => {
-    const { showAddDiamond } = useAddDScreen()
-    const { showDiamonds } = useShowDScreen()
+    const [ showAddDiamond, setShowAddDiamond ] = useState(false)
+    const [ showDiamonds, setShowDiamonds ] = useState(false)
 
     return (
-        <AddDScreenProvider>
-            <ShowDScreenProvider>
-                <div className="container">
-                    {!showAddDiamond && !showDiamonds && <Buttons />}
-                    {showAddDiamond && <AddDiamond />}
-                    {showDiamonds && <ShowDiamonds />}
-                </div>
-            </ShowDScreenProvider>
-        </AddDScreenProvider>
+        <div className="container">
+            {!showAddDiamond && !showDiamonds && <Buttons setShowAddDiamond={setShowAddDiamond} setShowDiamonds={setShowDiamonds} />}
+            {showAddDiamond && <AddDiamond setShowAddDiamond={setShowAddDiamond} />}
+            {showDiamonds && <ShowDiamonds setShowDiamonds={setShowDiamonds} />}
+        </div>
     )
 }
 

@@ -1,9 +1,10 @@
 ﻿import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@material-ui/core'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button } from '@material-ui/core'
+import { FaHome } from 'react-icons/fa'
 
-const ShowDiamonds = () => {
+const ShowDiamonds = ({ setShowDiamonds }) => {
     const [data, setData] = useState([])
 
     useEffect(data => {
@@ -84,6 +85,11 @@ const ShowDiamonds = () => {
                 <li>Number of diamonds = {data.length}</li>
                 <li>Average discount = {avgDiscount(data)}</li>
             </ul>
+
+            <Button type="submit" onClick={() => setShowDiamonds(false)}>
+                <FaHome />
+            </Button>
+
         </div>
     )
 }
