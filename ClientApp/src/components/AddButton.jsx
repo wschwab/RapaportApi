@@ -20,7 +20,7 @@ const AddButton = () => {
             </span>
             <span>
                 Add Diamond
-        </span>
+            </span>
         </div>
     )
 }
