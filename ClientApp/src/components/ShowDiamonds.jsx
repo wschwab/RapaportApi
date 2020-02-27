@@ -77,7 +77,7 @@ const ShowDiamonds = ({ setShowDiamonds }) => {
                 <li>Average discount = {avgDiscount(data)}</li>
             </ul>
 
-            <Button type="home" onClick={() => setShowDiamonds(false)}>
+            <Button type="button" onClick={() => setShowDiamonds(false)}>
                 <FaHome />
             </Button>
 
