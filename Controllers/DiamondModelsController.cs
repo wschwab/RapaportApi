@@ -29,7 +29,7 @@ namespace RapaportApi.Controllers
 
         // GET: api/DiamondModels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DiamondModel>> GetDiamondModel(Guid id)
+        public async Task<ActionResult<DiamondModel>> GetDiamondModel(string id)
         {
             var diamondModel = await _context.DiamondModels.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace RapaportApi.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDiamondModel(Guid id, DiamondModel diamondModel)
+        public async Task<IActionResult> PutDiamondModel(string id, DiamondModel diamondModel)
         {
             if (id != diamondModel.Id)
             {
@@ -96,12 +96,12 @@ namespace RapaportApi.Controllers
                 }
             }
 
-            return CreatedAtAction(nameof(GetDiamondModel), new { id = Guid.NewGuid() }, diamondModel);
+            return CreatedAtAction(nameof(GetDiamondModel), new { id = diamondModel.Id }, diamondModel);
         }
 
         // DELETE: api/DiamondModels/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<DiamondModel>> DeleteDiamondModel(Guid id)
+        public async Task<ActionResult<DiamondModel>> DeleteDiamondModel(string id)
         {
             var diamondModel = await _context.DiamondModels.FindAsync(id);
             if (diamondModel == null)
@@ -115,7 +115,7 @@ namespace RapaportApi.Controllers
             return diamondModel;
         }
 
-        private bool DiamondModelExists(Guid id)
+        private bool DiamondModelExists(string id)
         {
             return _context.DiamondModels.Any(e => e.Id == id);
         }
